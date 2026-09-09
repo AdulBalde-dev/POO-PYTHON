@@ -1,0 +1,257 @@
+🧠 Resumo de POO em Python
+1. 🏗️ Classe
+
+Definição:
+Uma classe é um molde usado para criar objetos. Ela define quais dados e comportamentos esses objetos terão.
+
+class Produto:
+    pass
+
+🧠 Pense: classe = molde de bolo.
+
+2. 📦 Objeto
+
+Definição:
+Um objeto é uma instância de uma classe, ou seja, algo que foi criado a partir do molde.
+
+iphone = Produto()
+
+🧠 Pense: objeto = bolo feito usando o molde.
+
+3. 👤 self
+
+Definição:
+self representa o próprio objeto atual dentro de um método.
+
+class Produto:
+    def mostrar(self):
+        print(self.nome)
+
+Se fizermos:
+
+iphone.mostrar()
+
+Nesse momento, self representa iphone.
+
+🧠 Pense: self = "este objeto aqui".
+
+4. ⚙️ __init__
+
+Definição:
+__init__ é um método especial executado automaticamente quando uma instância é inicializada. Ele normalmente serve para definir os dados iniciais do objeto.
+
+class Produto:
+    def __init__(self, nome, preco):
+        self.nome = nome
+        self.preco = preco
+iphone = Produto("iPhone", 1200)
+
+🧠 Pense: __init__ = preparar o objeto quando ele nasce.
+
+Tecnicamente, __init__ não é o que cria a instância; ele inicializa a instância que já foi criada.
+
+5. 🔧 Métodos
+
+Definição:
+Métodos são funções pertencentes a uma classe. Eles representam comportamentos ou ações que os objetos podem realizar.
+
+class Produto:
+    def vender(self):
+        print("Produto vendido")
+iphone.vender()
+
+🧠 Pense: atributos = o que o objeto tem; métodos = o que o objeto faz.
+
+6. 🔒 Encapsulamento
+
+Definição:
+Encapsulamento é o princípio de organizar e proteger os dados internos de um objeto, controlando como eles podem ser acessados ou alterados.
+
+Exemplo:
+
+class Produto:
+    def __init__(self, preco):
+        self._preco = preco
+
+E podemos controlar alterações usando @property e setter.
+
+🧠 Pense: não deixar qualquer pessoa mexer diretamente dentro da máquina.
+
+7. 🏷️ @property
+
+Definição:
+@property permite acessar um método como se fosse um atributo, geralmente para controlar ou personalizar a leitura de um valor.
+
+class Produto:
+    @property
+    def preco(self):
+        return self._preco
+
+Podemos fazer:
+
+print(produto.preco)
+
+em vez de:
+
+print(produto.preco())
+
+🧠 Pense: @property = transformar uma função em algo que parece um atributo.
+
+8. 🏢 Atributos de classe
+
+Definição:
+São atributos que pertencem à classe como um todo, e não exclusivamente a cada objeto.
+
+class Produto:
+    total_produtos = 0
+
+Todos os objetos pertencem à mesma classe:
+
+              Produto
+                 │
+        total_produtos = 10
+                 │
+       ┌─────────┴─────────┐
+       ↓                   ↓
+    iPhone                TV
+
+🧠 Pense: atributo de classe = informação compartilhada pela família inteira.
+
+9. 🏭 @classmethod
+
+Definição:
+@classmethod cria um método que recebe a classe (cls) como primeiro argumento, em vez de receber uma instância (self).
+
+class Produto:
+
+    @classmethod
+    def criar_do_texto(cls, texto):
+        ...
+
+É muito usado para criar objetos de maneiras alternativas.
+
+produto = Produto.criar_do_texto("iPhone,1200")
+
+🧠 Pense:
+
+self → objeto
+cls  → classe
+10. 🧮 @staticmethod
+
+Definição:
+@staticmethod cria um método que não recebe automaticamente nem self nem cls.
+
+Ele é usado quando precisamos de uma função relacionada conceitualmente à classe, mas que não precisa acessar dados do objeto nem da classe.
+
+class Produto:
+
+    @staticmethod
+    def calcular_desconto(preco, percentual):
+        return preco * percentual / 100
+
+🧠 Pense:
+
+self → objeto
+cls  → classe
+nenhum → @staticmethod
+11. 🧬 Herança
+
+Definição:
+Herança permite que uma classe filha aproveite atributos e métodos de uma classe pai.
+
+class Produto:
+    def mostrar(self):
+        print("Produto")
+
+
+class ProdutoFisico(Produto):
+    pass
+
+ProdutoFisico herda de Produto.
+
+       Produto
+          │
+          ↓
+   ProdutoFisico
+
+🧠 Pense: filho recebe características do pai.
+
+12. 🔝 super()
+
+Definição:
+super() permite acessar comportamentos da classe pai, principalmente para reutilizar código da classe pai.
+
+class ProdutoFisico(Produto):
+
+    def __init__(self, nome, preco, peso):
+        super().__init__(nome, preco)
+        self.peso = peso
+
+Aqui:
+
+super().__init__(nome, preco)
+
+significa:
+
+"Pai, faça a parte que você já sabe fazer."
+
+🧠 Pense: super() = pedir ajuda ao pai.
+
+13. 🔄 Sobrescrita (Overriding)
+
+Definição:
+Sobrescrita acontece quando uma classe filha cria novamente um método que já existe na classe pai, mudando ou especializando seu comportamento.
+
+class Produto:
+    def mostrar(self):
+        print("Produto")
+
+
+class ProdutoFisico(Produto):
+    def mostrar(self):
+        print("Produto físico")
+
+O filho substituiu o comportamento herdado de mostrar().
+
+🧠 Pense:
+
+"O pai faz assim, mas eu, filho, quero fazer de outro jeito."
+
+14. 🎭 Polimorfismo
+
+Definição:
+Polimorfismo permite que objetos diferentes respondam à mesma chamada de método de maneiras diferentes.
+
+class ProdutoFisico:
+    def mostrar(self):
+        print("Produto físico")
+
+
+class ProdutoDigital:
+    def mostrar(self):
+        print("Produto digital")
+
+Podemos fazer:
+
+produtos = [
+    ProdutoFisico(),
+    ProdutoDigital()
+]
+
+for produto in produtos:
+    produto.mostrar()
+
+Resultado:
+
+Produto físico
+Produto digital
+
+A chamada é a mesma:
+
+produto.mostrar()
+
+Mas o comportamento muda conforme o objeto.
+
+🧠 Pense:
+
+"Mesma pergunta, respostas diferentes dependendo de quem responde."c

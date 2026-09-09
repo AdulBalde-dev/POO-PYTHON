@@ -1,0 +1,13 @@
+class → molde
+
+objeto → coisa criada pelo molde
+
+self → objeto atual
+
+__init__ → inicializa o objeto
+
+atributos → dados do objeto
+
+métodos → ações do objeto
+
+@property → permite controlar o acesso aos atributos
