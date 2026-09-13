@@ -16,14 +16,14 @@ class Produto:
 
 class ProdutoFisico(Produto):
     def __init__(self, nome, preco, categoria, peso):
-        # rodar o init do pai depois o do filho 
+        # rodar o init do pai, depois o do filho 
         super().__init__(nome, preco, categoria)
         # init do filho
         self.peso = peso
 
 
     # sem super() sobiscrivi completamente o metodo do pai
-    # sobrescrita do medo pai
+    # sobrescrita do metodo pai
     # def mostrar(self):
     #     return print(f'Nome: {self.nome}, Preco: {self.preco}, Peso: {self.peso}')
 

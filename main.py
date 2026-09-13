@@ -25,7 +25,7 @@ class Produto:
     def criar_do_texto(cls, texto):
         nome, preco, categoria, estoque = texto.split(',')
 
-
+        # como se fosse: produto = Produto(nome, preco, categoria, estoque)
         return cls(
             nome,
             float(preco),
@@ -35,7 +35,7 @@ class Produto:
 
     
     @staticmethod
-    def calcular_desconto(preco, percentual):
+    def calcular_desconto(preco: int | float, percentual: int):
         return preco * (percentual / 100)
 
     # pega/le o valor
@@ -67,20 +67,24 @@ class Produto:
 
 
     def vender(self):
-        if self.estoque > 0:
-            self.estoque = self.estoque -1
-        else:
-            print('Produto sem estoque')
+        if self.estoque <= 0:
+            raise ValueError('Produto sem estoque')
+
+        self.estoque -= 1
+        print('Produto sem estoque')
 
 
     def repor_estoque(self, quantidade: int):
         if quantidade < 0:
             raise ValueError('Quantidade nao pode ser negativo.')
+        
         self.estoque = self.estoque + quantidade
 
 
 p1 = Produto('Iphone', 1200, 'Smartphone', 1)
 
+percento = Produto('Iphone', 1500, 'Smartphone', 10).calcular_desconto(1000, 50)
+print(percento)
 
 # p2 = Produto('Camisas', 50, 'Roupa', 2)
 

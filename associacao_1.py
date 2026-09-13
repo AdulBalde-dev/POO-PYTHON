@@ -31,8 +31,8 @@ class Gerente:
         print(f'{self.nome} está supervisionando {funcionario.nome}')
 
 
-func = Funcionario('Adul')
+funcionario = Funcionario('Adul')
 
 gerente = Gerente('Herr Kuhnert')
-gerente.supervisionar(func)
+gerente.supervisionar(funcionario)
 

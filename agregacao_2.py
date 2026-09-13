@@ -7,6 +7,7 @@ class Produto:
 class Loja:
     def __init__(self, nome: str):
         self.nome = nome
+        # para armazenar os produtos.
         self.produtos = []
 
     def adicionar_produto(self, produto: Produto):
@@ -21,6 +22,7 @@ loja = Loja('Media Markt')
 loja.adicionar_produto(tv)
 loja.adicionar_produto(iphone)
 loja.adicionar_produto(pc)
+
 
 for produto in loja.produtos:
     print(produto.nome)
